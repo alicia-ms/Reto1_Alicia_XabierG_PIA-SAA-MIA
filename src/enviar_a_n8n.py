@@ -1,13 +1,15 @@
 import requests
+from app import stramlit_app as st
+from src import reglas
+from src import motor
 
 datos = {
-    "cancion": "Mi canción",
-    "artista": "Artista de prueba",
-    "email": "contacto@ejemplo.com",
+    "canción": st.cancion,
+    "artista": st.performer,
+    "email": st.email,
     "probabilidad_top30": 0.70,
-    "decision": "invertir",
+    #"decision": motor.motor(caso, reglas)['decision'],
     "modelo": "Random Forest",
-    "fecha": "2026-11-09"
 }
 
 respuesta = requests.post(
