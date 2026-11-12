@@ -2,12 +2,15 @@
 import streamlit as st
 import pandas as pd
 import joblib
+from src import reglas
+from src import motor
 
 @st.cache_data
 def cargar_datos():
     df = pd.read_csv("../data/raw/billboard_processed.csv")
     return df
 
+# Lo ideal es guardar un Pipeline completo que incluya el procesamiento y el modelo.
 # @st.cache_resource
 # def cargar_modelo():
 #     # Carga tu modelo entrenado (Random Forest u otro)
@@ -22,6 +25,10 @@ st.subheader("Introduce las características de tu canción")
 
 # Nombre del artista
 performer = st.text_input("Nombre artístico", value="Artista Desconocido")
+
+email = st.text_input("Correo electrónico de contacto", value="")
+
+cancion = st.text_input("Nombre de la canción", value="")
 
 # Duración
 duracion = st.slider(
@@ -123,7 +130,7 @@ acoustic_mood_cluster = st.selectbox(
 )
 
 if st.button("Predecir éxito de la canción"):
-    cancion_nueva = [{
+    cancion = {
         "performer": performer,
         "spotify_track_duration_ms": spotify_track_duration_ms,
         "spotify_track_explicit": spotify_track_explicit,
@@ -136,14 +143,32 @@ if st.button("Predecir éxito de la canción"):
         "instrumentalness": instrumentalness,
         "tempo": tempo,
         "time_signature": time_signature,
-        "acoustic_mood_cluster": acoustic_mood_cluster   
-    }]
-    
-    #prediccion = modelo.predict(cancion_nueva)[0]
-    #probabilidad = modelo.predict_proba(cancion_nueva)[0][1]
-    
-    ## Mirarlo después con reglas.py
-    
-    ## de reglas.py pasarlo a enviar_a_n8n.py
-    
-    ## de enviar_a_n8n.py pasarlo a n8n para automatizar los email con las normas ya decididas.
+        "acoustic_mood_cluster": acoustic_mood_cluster
+    }
+
+    try:
+        
+        # 2. Aquí validaremos los datos y ejecutaremos el modelo
+        # probabilidad = ...
+        
+        # if probabilidad is None:
+        #     st.info(
+        #         "El modelo todavía no está conectado. "
+        #         "Introduce una probabilidad de prueba para "
+        #         "comprobar el funcionamiento de las reglas."
+        #     )
+
+        # 3. Añadir la probabilidad al caso
+        #cancion["p"] = probabilidad
+
+        # 4. Ejecutar el motor de reglas
+        resultado = motor(cancion, reglas)
+
+        # 5. Mostrar la decisión
+        st.success(resultado["decision"])
+        st.write("Reglas aplicadas:", resultado["usadas"])
+        st.write("Explicación:", resultado["porque"]) 
+        
+        
+    except Exception as e:
+        st.error(f"Se ha producido un error al procesar la canción: {e}")
