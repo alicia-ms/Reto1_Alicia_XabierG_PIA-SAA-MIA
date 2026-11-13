@@ -36,10 +36,19 @@ def si_R2(d):
         "acoustic_mood_cluster"
     ]
 
-    return any(
-        d.get(campo) is None or d.get(campo) == ""
-        for campo in campos_obligatorios
-    )
+    for campo in campos_obligatorios:
+        valor = d.get(campo)
+
+        if valor is None:
+            return True
+
+        if isinstance(valor, str) and not valor.strip():
+            return True
+
+        if isinstance(valor, (float, int)) and not math.isfinite(valor):
+            return True
+
+    return False
     
 def si_R3(d):
     """R3. ¿La probabilidad es igual o superior al 80 %?"""

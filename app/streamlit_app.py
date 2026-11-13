@@ -1,24 +1,29 @@
 
+import sys
+from pathlib import Path
+
+RAIZ = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(RAIZ))
+
 import streamlit as st
 import pandas as pd
 import joblib
-from src import reglas
-from src import motor
+from mia.enviar import enviar_decision
+from mia import reglas
+from mia import motor
+from mia.prediccion import predecir_cancion
 
 @st.cache_data
 def cargar_datos():
     df = pd.read_csv("../data/raw/billboard_processed.csv")
     return df
 
-# Lo ideal es guardar un Pipeline completo que incluya el procesamiento y el modelo.
-# @st.cache_resource
-# def cargar_modelo():
-#     # Carga tu modelo entrenado (Random Forest u otro)
-#     # Asegúrate de haber guardado tu modelo como 'modelo_hit.pkl' o cámbialo por tu nombre
-#     return joblib.load("modelo_hit.pkl")
+@st.cache_resource
+def cargar_modelo():
+    return joblib.load("../model/RedNeuronal_completo.joblib")
 
 df = cargar_datos()
-#modelo = cargar_modelo()
+modelo = cargar_modelo()
 
 st.title("HitPredict AI")
 st.subheader("Introduce las características de tu canción")
@@ -26,9 +31,9 @@ st.subheader("Introduce las características de tu canción")
 # Nombre del artista
 performer = st.text_input("Nombre artístico", value="Artista Desconocido")
 
-email = st.text_input("Correo electrónico de contacto", value="")
+email = st.text_input("Correo electrónico de contacto", value="email@example.com")
 
-cancion = st.text_input("Nombre de la canción", value="")
+cancion = st.text_input("Nombre de la canción", value="loquesea")
 
 # Duración
 duracion = st.slider(
@@ -130,7 +135,7 @@ acoustic_mood_cluster = st.selectbox(
 )
 
 if st.button("Predecir éxito de la canción"):
-    cancion = {
+    datos_cancion = {
         "performer": performer,
         "spotify_track_duration_ms": spotify_track_duration_ms,
         "spotify_track_explicit": spotify_track_explicit,
@@ -145,29 +150,46 @@ if st.button("Predecir éxito de la canción"):
         "time_signature": time_signature,
         "acoustic_mood_cluster": acoustic_mood_cluster
     }
+    
+    if reglas.si_R2(datos_cancion):
+
+        st.error("Faltan datos obligatorios.")
+        st.stop()
+
+    if not cancion.strip() or not email.strip():
+
+        st.error("Introduce el nombre de la canción y tu correo.")
+        st.stop()
 
     try:
+                           
+        probabilidad = predecir_cancion(datos_cancion, modelo)
         
-        # 2. Aquí validaremos los datos y ejecutaremos el modelo
-        # probabilidad = ...
+        datos_cancion["p"] = float(probabilidad)
+
+        resultado = motor.motor(datos_cancion, reglas.reglas)
         
-        # if probabilidad is None:
-        #     st.info(
-        #         "El modelo todavía no está conectado. "
-        #         "Introduce una probabilidad de prueba para "
-        #         "comprobar el funcionamiento de las reglas."
-        #     )
+        datos_n8n = {
+        "cancion": cancion,
+        "performer": performer,
+        "email": email,
+        "probabilidad": probabilidad,
+        "decision": resultado["decision"],
+        "reglas_aplicadas": resultado["usadas"],
+        "explicacion": resultado["porque"],
+        "modelo": "Red neuronal"
+        }
 
-        # 3. Añadir la probabilidad al caso
-        #cancion["p"] = probabilidad
+        enviar_decision(datos_n8n)
+        
+        st.write(
+            f"Probabilidad de entrar en el Top 30: "
+            f"{probabilidad:.2%}"
+        )
 
-        # 4. Ejecutar el motor de reglas
-        resultado = motor(cancion, reglas)
-
-        # 5. Mostrar la decisión
-        st.success(resultado["decision"])
-        st.write("Reglas aplicadas:", resultado["usadas"])
-        st.write("Explicación:", resultado["porque"]) 
+        # st.success(resultado["decision"])
+        # st.write("Reglas aplicadas:", resultado["usadas"])
+        # st.write("Explicación:", resultado["porque"]) 
         
         
     except Exception as e:
