@@ -1,0 +1,24 @@
+artifact_path: file:c:/Users/Alicia.martinez/Desktop/Reto1_Alicia_XabierG_PIA-SAA-MIA/notebooks/mlruns/1/models/m-6f04c90284aa44cd9808a827be3ae0e4/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.skops
+    predict_fn: predict
+    python_version: 3.12.14
+  sklearn:
+    code: null
+    pickled_model: model.skops
+    serialization_format: skops
+    sklearn_version: 1.9.1
+    skops_trusted_types:
+    - sklearn.tree._tree.Tree
+mlflow_version: 3.18.0
+model_id: m-6f04c90284aa44cd9808a827be3ae0e4
+model_size_bytes: 490329123
+model_uuid: m-6f04c90284aa44cd9808a827be3ae0e4
+prompts: null
+run_id: 67e341e5e05649468bde8ff647cf3c2a
+utc_time_created: '2026-11-13 19:06:11.092525'
