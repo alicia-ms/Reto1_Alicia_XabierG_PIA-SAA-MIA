@@ -1,0 +1,330 @@
+{
+  "name": "proyectoMusica",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "empresa/decision",
+        "authentication": "headerAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        16
+      ],
+      "id": "70963be3-b4e3-4030-a298-651457ff13de",
+      "name": "Webhook",
+      "webhookId": "760ab22d-5ab0-4c3e-8f00-78b1d6101217",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "tNtCCeQhGTewanG6",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "8c41590d-266a-4768-9dcf-6ab884db9f5d",
+                    "leftValue": "={{ $json.body.decision }}",
+                    "rightValue": "RECOMENDAR INVERSION",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Recomendar inversión"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "21a0c5a3-95c9-4180-93ca-f372fe309b11",
+                    "leftValue": "={{ $json.body.decision }}",
+                    "rightValue": "REVISION PRIORITARIA",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Revisión prioritaria"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "07fb27cb-f761-4e44-bba2-915c81f1e1d4",
+                    "leftValue": "={{ $json.body.decision }}",
+                    "rightValue": "REVISION ADICIONAL",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Revisión adicional"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "4b889468-33a2-42a4-b668-32db11a0e000",
+                    "leftValue": "={{ $json.body.decision }}",
+                    "rightValue": "NO RECOMENDAR INVERSION",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "No recomendar inversión"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        224,
+        0
+      ],
+      "id": "29222478-a4ed-453d-8dc9-17a6b2ff9ea0",
+      "name": "Switch",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"ok\": true,\n  \"mensaje\": \"Hola, {{ $('Webhook').item.json.body.performer }}:\n\n¡Tenemos buenas noticias!\n\nHemos analizado tu canción, {{ $('Webhook').item.json.body.cancion }}, mediante nuestro sistema de predicción HitPredict AI y los resultados son muy prometedores. Nuestro modelo estima una probabilidad elevada de que tu canción consiga entrar en el Top 30 de Billboard Hot 100.\n\nNos gustaría darte la enhorabuena por el gran trabajo realizado y proponerte una reunión lo antes posible para hablar sobre una posible colaboración e inversión en tu proyecto. ¿Podrías indicarnos tu disponibilidad para organizarla?\n\n¡Tenemos muchas ganas de conocer más sobre tu proyecto!\n\nUn saludo,\"\n}\n ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        576,
+        -352
+      ],
+      "id": "c32eee9d-0307-4b63-b9b8-eafb386d90d5",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"ok\": true,\n  \"mensaje\": \"Hola, {{ $('Webhook').item.json.body.performer }}:\n\nGracias por compartir con nosotros tu canción, {{ $('Webhook').item.json.body.cancion }}. Hemos realizado un análisis inicial con nuestro sistema de predicción HitPredict AI y, por el momento, los resultados no son concluyentes.\n\nPor este motivo, nuestro equipo realizará una revisión adicional antes de tomar una decisión. Si necesitamos más información, nos pondremos en contacto contigo.\n\nAgradecemos tu paciencia y el interés en trabajar con nosotros. Un saludo,\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        576,
+        64
+      ],
+      "id": "ef5e83b6-b31b-4f90-872c-fbf1dbba77a2",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"ok\": true,\n  \"mensaje\": \"Hola, {{ $('Webhook').item.json.body.performer }}:\n\nMuchas gracias por enviarnos tu canción, {{ $('Webhook').item.json.body.cancion }}, y por el tiempo dedicado a presentarnos tu proyecto.\n\nTras analizarla con nuestro sistema de predicción HitPredict AI, en esta ocasión no vamos a poder avanzar con una propuesta de inversión. Esta decisión se basa en nuestros criterios actuales de proyección comercial y no refleja un juicio sobre tu talento o la calidad de tu trabajo.\n\nTe animamos a seguir creando y, si lo deseas, a presentarnos nuevos proyectos en el futuro. Te deseamos mucho éxito.\n\nUn saludo,\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        576,
+        272
+      ],
+      "id": "80adae37-2e5e-4d09-b74b-1173d943f097",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Webhook').item.json.body.email }}",
+        "subject": "Tenemos noticias sobre tu canción",
+        "message": "={{ $json.mensaje }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1344,
+        -64
+      ],
+      "id": "b0bf3974-150a-4013-b54c-a51486cb4477",
+      "name": "Send a message",
+      "webhookId": "a397e09b-76fa-431a-92a6-13987511f416",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "GVr37Ry1J0KseRMz",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"ok\": true,\n  \"mensaje\": \"Hola, {{ $('Webhook').item.json.body.performer }}:\n\nGracias por enviarnos tu canción, {{ $('Webhook').item.json.body.cancion }}. Hemos realizado un primer análisis con nuestro sistema de predicción HitPredict AI y los resultados son alentadores: tu propuesta muestra un potencial interesante dentro del mercado.\n\nPor ello, hemos decidido darle prioridad en nuestro proceso de revisión. Nuestro equipo la estudiará con más detalle en los próximos días y, si todo va bien, nos pondremos en contacto contigo para valorar los siguientes pasos.\n\nMientras tanto, si tienes más material (otras canciones, datos de escuchas, planes de promoción), no dudes en enviárnoslo, nos ayudará mucho en la evaluación.\n\nGracias por confiar en nosotros. Un saludo,\"\n}\n ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        576,
+        -144
+      ],
+      "id": "d4e6dcfd-8c1b-4008-a9b7-a4b46f9c356b",
+      "name": "Edit Fields3"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "95f5c483-fbbd-4d93-8879-c40127aaa60b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c2cdb4f06b22cecdc5666407ebb52e150a437988a3d26ab830c6cf44842650ae"
+  },
+  "nodeGroups": [],
+  "id": "y4VloNYU6T90f95Z",
+  "tags": []
+}

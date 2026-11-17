@@ -119,8 +119,9 @@ tempo = st.slider(
 )
 
 time_signature = st.selectbox(
-    "Time signature",
-    [3, 4, 5, 6, 7]
+    "Compás musical",
+    [3, 4, 5, 6, 7],
+    format_func=lambda x: f"{x}/4"
 )
 
 acoustic_mood_cluster = st.selectbox(
