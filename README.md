@@ -1,6 +1,7 @@
+
 # 🎵 Spotify Music Analysis & Machine Learning
 
-Análisis exploratorio de canciones de Spotify, identificación de patrones musicales mediante *Mood Clusters* y desarrollo de modelos de Machine Learning para estudiar la popularidad de las canciones.
+Análisis exploratorio de canciones de Spotify, identificación de patrones musicales mediante **Mood Clusters** y desarrollo de modelos de Machine Learning para estudiar la popularidad de las canciones.
 
 ---
 
@@ -9,8 +10,6 @@ Análisis exploratorio de canciones de Spotify, identificación de patrones musi
 Este proyecto tiene como objetivo analizar un conjunto de datos de canciones de Spotify para estudiar sus características musicales, identificar patrones y explorar qué factores pueden estar relacionados con la popularidad de las canciones.
 
 A través de técnicas de análisis exploratorio de datos, visualización y Machine Learning, se estudian las relaciones entre diferentes atributos musicales y se desarrollan modelos predictivos.
-
-El proyecto combina el análisis de datos con técnicas de aprendizaje automático, permitiendo obtener información sobre el comportamiento de las canciones y sus características.
 
 ## 🎯 Objetivos
 
@@ -99,6 +98,7 @@ En esta sección se presentan las principales conclusiones obtenidas durante el 
 
 Se incluyen comparaciones entre algoritmos, resultados de las métricas y visualizaciones que permiten interpretar los patrones identificados en los datos.
 
+![Resultados de los modelos](imagenes/resultados_modelos.png)
 
 ## 🛠️ Tecnologías y herramientas
 
