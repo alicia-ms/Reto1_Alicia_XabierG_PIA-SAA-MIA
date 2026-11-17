@@ -54,20 +54,6 @@ Se utilizan diferentes técnicas de visualización:
 - Boxplots para comparar las características entre diferentes *Mood Clusters*.
 - Mapas de calor para visualizar perfiles medios y correlaciones.
 
-### Visualizaciones
-
-**Distribución de características musicales**
-
-![Distribución de variables](imagenes/distribucion_variables.png)
-
-**Relación entre características musicales y Mood Clusters**
-
-![Mood Clusters](imagenes/mood_clusters.png)
-
-**Comparación de Danceability entre Mood Clusters**
-
-![Danceability por Mood Cluster](imagenes/danceability_mood_clusters.png)
-
 ## 🤖 Machine Learning
 
 Se desarrolla una fase de aprendizaje automático para estudiar la capacidad predictiva de las características musicales.
@@ -76,9 +62,12 @@ Se prueban diferentes algoritmos de clasificación y se comparan sus resultados 
 
 ### Modelos utilizados
 
+- Regresión lineal.
 - K-Nearest Neighbors (KNN).
 - Random Forest.
 - XGBoost.
+- SVM.
+- Red neuronal.
 
 ### Optimización y evaluación
 
