@@ -1,0 +1,22 @@
+artifact_path: file:c:/Users/Alicia.martinez/Desktop/Reto1_Alicia_XabierG_PIA-SAA-MIA/notebooks/mlruns/1/models/m-351d0ded50d243d9a069ea4ce4bcc24c/artifacts
+flavors:
+  python_function:
+    data: model.ubj
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.xgboost
+    python_version: 3.12.14
+  xgboost:
+    code: null
+    data: model.ubj
+    model_class: xgboost.sklearn.XGBClassifier
+    model_format: ubj
+    xgb_version: 3.4.1
+mlflow_version: 3.18.0
+model_id: m-351d0ded50d243d9a069ea4ce4bcc24c
+model_size_bytes: 1690914
+model_uuid: m-351d0ded50d243d9a069ea4ce4bcc24c
+prompts: null
+run_id: d2bcdf0ae6e148859a9f1b55e379406a
+utc_time_created: '2026-11-13 17:31:13.375674'
