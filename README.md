@@ -1,32 +1,81 @@
-
 # 🎵 Spotify Music Analysis & Machine Learning
 
-Análisis exploratorio de canciones de Spotify, identificación de patrones musicales mediante **Mood Clusters** y desarrollo de modelos de Machine Learning para estudiar la popularidad de las canciones.
+Sistema inteligente de análisis musical que utiliza datos de Spotify y técnicas de Machine Learning para identificar patrones musicales, predecir la popularidad de las canciones y automatizar acciones mediante n8n.
 
 ---
 
-## 📌 Descripción del proyecto
+## 📸 Aplicación desarrollada
 
-Este proyecto tiene como objetivo analizar un conjunto de datos de canciones de Spotify para estudiar sus características musicales, identificar patrones y explorar qué factores pueden estar relacionados con la popularidad de las canciones.
+Aplicación interactiva desarrollada con Streamlit que permite visualizar los resultados del análisis y consultar las predicciones del sistema.
 
-A través de técnicas de análisis exploratorio de datos, visualización y Machine Learning, se estudian las relaciones entre diferentes atributos musicales y se desarrollan modelos predictivos.
+**📷 CAPTURA 1: Pantalla principal de Streamlit**
 
-## 🎯 Objetivos
+Guarda aquí la captura con el nombre `streamlit.png`.
 
-- Realizar un análisis exploratorio del conjunto de datos.
-- Estudiar la distribución de las principales características musicales.
-- Analizar las relaciones entre atributos como *danceability*, *loudness*, *tempo* e *instrumentalness*.
-- Explorar los patrones musicales mediante agrupaciones (*Mood Clusters*).
-- Estudiar la relación entre las características de las canciones y su popularidad.
-- Entrenar y comparar diferentes modelos de Machine Learning.
-- Optimizar los hiperparámetros de los modelos.
-- Registrar y realizar un seguimiento de los experimentos mediante MLflow.
+![Aplicación Streamlit](imagenes/streamlit.png)
 
-## 📊 Dataset
+![Aplicación Streamlit](imagenes/streamlit1.png)
 
-El conjunto de datos contiene información sobre canciones y sus características musicales.
+---
 
-Entre las principales variables encontramos:
+## 📌 1. Necesidad de negocio
+
+La gran cantidad de canciones disponibles en plataformas musicales como Spotify hace que resulte interesante disponer de herramientas capaces de analizar sus características y detectar patrones que permitan comprender mejor el comportamiento de la música.
+
+La necesidad que aborda este proyecto es desarrollar un sistema que permita analizar las características musicales de las canciones, identificar diferentes perfiles musicales y estudiar qué factores pueden estar relacionados con su popularidad.
+
+Para ello, se plantea una solución que combina técnicas de análisis de datos, Machine Learning y automatización de procesos.
+
+El sistema permite:
+
+- Analizar las características musicales de las canciones.
+- Identificar patrones y agrupaciones según sus características.
+- Estudiar la relación entre los atributos musicales y la popularidad.
+- Obtener predicciones mediante modelos de Machine Learning.
+- Aplicar reglas de decisión sobre los resultados obtenidos.
+- Automatizar acciones mediante n8n.
+
+---
+
+## ⚙️ 2. ¿Qué hemos construido?
+
+Se ha desarrollado un sistema que integra análisis de datos, modelos de Machine Learning, reglas de decisión y automatización mediante n8n.
+
+### Arquitectura del sistema
+
+El funcionamiento general sigue el siguiente flujo:
+
+```mermaid
+flowchart LR
+    A[Modelo de Machine Learning] --> B[Reglas de decisión]
+    B --> C[n8n]
+    C --> D[Acción automatizada]
+```
+
+### Funcionamiento
+
+1. **Modelo:** analiza las características musicales de las canciones y genera una predicción.
+2. **Reglas:** interpreta los resultados del modelo y determina qué condiciones se cumplen.
+3. **n8n:** recibe la información y gestiona el flujo de automatización.
+4. **Acción:** se ejecuta la acción correspondiente según las reglas establecidas.
+
+### Inteligencia artificial débil
+
+El sistema se considera un ejemplo de **IA débil o estrecha (Narrow AI)** porque está diseñado para realizar tareas específicas relacionadas con el análisis musical y la predicción. No posee inteligencia general ni capacidad de razonamiento independiente fuera de las tareas para las que ha sido desarrollado.
+
+### Tipo de aprendizaje
+
+Se utilizan técnicas de **aprendizaje supervisado (Supervised Learning)** para entrenar modelos de clasificación a partir de datos etiquetados.
+
+Además, se trabaja con agrupaciones (*Mood Clusters*) para identificar patrones musicales y estudiar las similitudes entre canciones.
+
+---
+
+## 📊 3. Los datos
+
+El proyecto utiliza un conjunto de datos de canciones de Spotify que contiene información sobre sus características musicales, artistas, géneros y popularidad.
+
+### Principales variables del dataset
 
 | Variable | Descripción |
 |---|---|
@@ -42,9 +91,9 @@ Entre las principales variables encontramos:
 | `acoustic_mood_cluster` | Agrupación según características musicales |
 | `top30` | Variable relacionada con la popularidad |
 
-## 🔍 Análisis exploratorio de datos (EDA)
+### Análisis exploratorio (EDA)
 
-Se realiza un análisis exploratorio para comprender la estructura del dataset, estudiar sus variables y detectar patrones relevantes.
+Se realiza un análisis exploratorio para comprender el comportamiento de los datos, detectar patrones y estudiar las relaciones entre las diferentes características musicales.
 
 Se utilizan diferentes técnicas de visualización:
 
@@ -54,56 +103,87 @@ Se utilizan diferentes técnicas de visualización:
 - Boxplots para comparar las características entre diferentes *Mood Clusters*.
 - Mapas de calor para visualizar perfiles medios y correlaciones.
 
-## 🤖 Machine Learning
+### Principales descubrimientos
 
-Se desarrolla una fase de aprendizaje automático para estudiar la capacidad predictiva de las características musicales.
+- **Danceability:** [Añadir el descubrimiento principal sobre la facilidad para bailar].
+- **Mood Clusters:** [Explicar las diferencias más importantes entre las agrupaciones musicales].
+- **Características musicales:** [Añadir las relaciones más interesantes encontradas entre las variables].
+- **Popularidad:** [Explicar qué características parecen estar relacionadas con la popularidad].
 
-Se prueban diferentes algoritmos de clasificación y se comparan sus resultados para seleccionar los modelos con mejor rendimiento.
+## 🤖 4. Modelos de Machine Learning
+
+Se entrenan y comparan diferentes algoritmos de clasificación para estudiar su capacidad predictiva.
 
 ### Modelos utilizados
 
-- Regresión lineal.
-- K-Nearest Neighbors (KNN).
-- Random Forest.
-- XGBoost.
-- SVM.
-- Red neuronal.
+- **Regresión Lineal:** algoritmo que modela la relación entre las variables de entrada y una variable objetivo mediante una función lineal.
+- **K-Nearest Neighbors (KNN):** algoritmo que realiza predicciones basándose en la proximidad entre observaciones.
+- **Support Vector Machine (SVM):** algoritmo que busca el hiperplano óptimo para separar las diferentes clases.
+- **Random Forest:** modelo basado en un conjunto de árboles de decisión que combina sus predicciones para mejorar la clasificación.
+- **XGBoost:** algoritmo de boosting que combina árboles de decisión de forma secuencial para mejorar el rendimiento predictivo.
+- **Red Neuronal:** modelo inspirado en el funcionamiento de las redes neuronales biológicas, compuesto por capas de neuronas que aprenden patrones complejos a partir de los datos.
 
-### Optimización y evaluación
+### Optimización de hiperparámetros
 
-Se realizan pruebas con diferentes combinaciones de hiperparámetros para mejorar el rendimiento de los modelos.
+Se realizan diferentes pruebas con combinaciones de hiperparámetros para encontrar las configuraciones que ofrecen mejores resultados.
 
-La evaluación se lleva a cabo utilizando conjuntos de entrenamiento, validación y prueba, empleando principalmente la métrica **F1-score** para comparar los resultados.
+La métrica principal utilizada para comparar los modelos es el **F1-score**, buscando un equilibrio entre precisión y exhaustividad.
 
 ### Seguimiento de experimentos con MLflow
 
-Se utiliza MLflow para registrar y organizar los experimentos de Machine Learning.
+Se utiliza MLflow para registrar los experimentos, almacenar parámetros y métricas, y facilitar la comparación de las diferentes configuraciones de los modelos.
 
-Se almacenan parámetros, métricas y resultados de los modelos, facilitando la comparación entre diferentes configuraciones y el seguimiento del proceso de entrenamiento.
+---
 
-## 📈 Resultados
+## 📈 5. Resultados y evaluación
 
-En esta sección se presentan las principales conclusiones obtenidas durante el análisis exploratorio y la evaluación de los modelos.
+### Comparación de modelos
 
-Se incluyen comparaciones entre algoritmos, resultados de las métricas y visualizaciones que permiten interpretar los patrones identificados en los datos.
+Los resultados de los experimentos se obtienen a partir de los registros almacenados en MLflow.
 
-![Resultados de los modelos](imagenes/resultados_modelos.png)
+| Modelo | F1-score Train | F1-score Validación |
+|---|---:|---:|
+| KNN | [Valor] | [Valor] |
+| Random Forest | [Valor] | [Valor] |
+| XGBoost | [Valor] | [Valor] |
 
-## 🛠️ Tecnologías y herramientas
+📷 CAPTURA 5: Vista de MLflow con los experimentos y sus métricas.
+
+![Resultados de MLflow](imagenes/resultados_mlflow.png)
+
+### Modelo seleccionado
+
+**Modelo elegido: Red neuronal**
+
+Se selecciona este modelo porque presenta los mejores resultados en la evaluación de validación, teniendo en cuenta principalmente el F1-score y su comportamiento general.
+
+La selección permite elegir la configuración que ofrece el mejor equilibrio entre precisión y capacidad para identificar correctamente las canciones de la clase positiva.
+
+### Evaluación final en test
+
+Una vez seleccionado el modelo, se realiza su evaluación sobre el conjunto de test para comprobar su capacidad de generalización sobre datos que no han intervenido en el entrenamiento ni en la selección del modelo.
+
+### Matriz de confusión
+
+📷 CAPTURA 6: Matriz de confusión del modelo seleccionado sobre test.
+
+Guardar como `matriz_confusion.png`.
+
+![Matriz de confusión](imagenes/matriz_confusion.png)
+
+La matriz de confusión permite analizar los aciertos y errores del modelo, identificando los falsos positivos y falsos negativos.
+
+---
+
+## 🛠️ 6. Tecnologías y herramientas
+
+### Lenguajes y entorno de desarrollo
 
 <p align="center">
   <img src="https://skillicons.dev/icons?i=python,anaconda,vscode,git,github" />
 </p>
 
-**Librerías y herramientas de análisis:**
-
-- Pandas
-- NumPy
-- Matplotlib
-- Seaborn
-- Scikit-learn
-- XGBoost
-- MLflow
+### Librerías y herramientas
 
 <p align="center">
   <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" />
@@ -113,7 +193,22 @@ Se incluyen comparaciones entre algoritmos, resultados de las métricas y visual
   <img src="https://img.shields.io/badge/Scikit--learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white" />
   <img src="https://img.shields.io/badge/XGBoost-EC6B23?style=for-the-badge" />
   <img src="https://img.shields.io/badge/MLflow-0194E2?style=for-the-badge&logo=mlflow&logoColor=white" />
+  <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" />
+  <img src="https://img.shields.io/badge/n8n-EA4B71?style=for-the-badge&logo=n8n&logoColor=white" />
 </p>
+
+- Python
+- Pandas y NumPy
+- Matplotlib y Seaborn
+- Scikit-learn
+- XGBoost
+- MLflow
+- Streamlit
+- n8n
+- Jupyter Notebook
+- Git y GitHub
+
+---
 
 ## 👩‍💻 Autores
 
