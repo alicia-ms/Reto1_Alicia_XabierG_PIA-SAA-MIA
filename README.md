@@ -12,9 +12,9 @@ Aplicación interactiva desarrollada con Streamlit que permite visualizar los re
 
 Guarda aquí la captura con el nombre `streamlit.png`.
 
-![Aplicación Streamlit](imagenes/streamlit.png)
+![Aplicación Streamlit](results/streamlit.png)
 
-![Aplicación Streamlit](imagenes/streamlit1.png)
+![Aplicación Streamlit](results/streamlit1.png)
 
 ---
 
@@ -149,7 +149,7 @@ Los resultados de los experimentos se obtienen a partir de los registros almacen
 
 📷 CAPTURA 5: Vista de MLflow con los experimentos y sus métricas.
 
-![Resultados de MLflow](imagenes/resultados_mlflow.png)
+![Resultados de MLflow](results/resultados_mlflow.png)
 
 ### Modelo seleccionado
 
@@ -169,7 +169,7 @@ Una vez seleccionado el modelo, se realiza su evaluación sobre el conjunto de t
 
 Guardar como `matriz_confusion.png`.
 
-![Matriz de confusión](imagenes/matriz_confusion.png)
+![Matriz de confusión](results/matriz_confusion.png)
 
 La matriz de confusión permite analizar los aciertos y errores del modelo, identificando los falsos positivos y falsos negativos.
 
