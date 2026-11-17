@@ -12,7 +12,7 @@ Aplicación interactiva desarrollada con Streamlit que permite visualizar los re
 
 Guarda aquí la captura con el nombre `streamlit.png`.
 
-![Aplicación Streamlit](//results/streamlit.png)
+![Aplicación Streamlit](results/streamlit.png)
 
 ![Aplicación Streamlit](results/streamlit1.png)
 
